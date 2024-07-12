@@ -1,0 +1,70 @@
+import random
+trabajadores = ["Juan Pérez", "María García", "Carlos López", "Ana Martínez", "Pedro Rodríguez",
+                "Laura Hernández", "Miguel Sánchez", "Isabel Gómez", "Francisco Díaz", "Elena Fernández"]
+
+# Diccionario para almacenar sueldos
+sueldos = {trabajador: 0 for trabajador in trabajadores}#Todos los sueldos iniciales de los trabajadores comienzan en 0
+
+def asignar_sueldos_aleatorios():
+    for trabajador in trabajadores:#Recorremos la lista de trabajadores
+        sueldos[trabajador] = random.randint(300000, 2500000)#Asiganmos a cada trabajador un sueldo aleatorio
+    print("Sueldos asignados aleatoriamente.")
+
+
+
+#Clasificamos los sueldos de mayor a menor 
+def clasificar_sueldos():
+    sueldos_ordenados = sorted(sueldos.items(), key=lambda x: x[1], reverse=True)#Funcion para escojer los sueldos mas bajos y mas altos 
+    print("Sueldos clasificados (de mayor a menor):")
+    sueldos_menores= sueldos_ordenados<800000
+    sueldos_mayores= sueldos_ordenados>800000 or sueldos_ordenados<2000000
+    sueldos_grandes=sueldos_ordenados>2000000
+    print("Sueldos menores={sueldos_menores}")
+    print("Sueldos mayores={sueldos_mayores}")
+    print("Sueldos grandes={sueldos_grandes}")
+    for trabajador, sueldo in sueldos_ordenados:
+        print(f"{trabajador}: ${sueldo}")#imprimimos los sueldos con el nombre de el trabajador 
+    #print("Sueldos menores={sueldos_menores}")
+    #print("Sueldos mayores={sueldos_mayores}")
+    #print("Sueldos grandes={sueldos_grandes}")
+
+def ver_estadisticas():
+    sueldos_valores = list(sueldos.values())
+    max_sueldo = max(sueldos_valores)#Buscamos el sueldo minimo en los sueldos aleatorios
+    min_sueldo = min(sueldos_valores)#Buscamos el sueldo mayor en los sueldos aleatorios 
+    promedio_sueldo = sum(sueldos_valores) / len(sueldos_valores)#Promediamos los sueldos 
+    print(f"Sueldo mínimo: ${min_sueldo}")#imprimimos el sueldo minimo de un trabajador 
+    print(f"Sueldo máximo: ${max_sueldo}")#imprimimos el sueldo maximo de un trabajador
+    print(f"Sueldo promedio: ${promedio_sueldo}")#imprimimos el promedio de un trabajador 
+
+def reporte_sueldos():
+    print("Reporte de sueldos: ")
+    for trabajador, sueldo in sueldos.items():
+        print(f"{trabajador}: ${sueldo}")
+
+def menu():
+    while True:#Creamos la sentencia de repeticion de el menu 
+        print("\nMenú de opciones:")#Damos a conocer las opciones
+        print("1. Asignar sueldos aleatorios")
+        print("2. Clasificar sueldos")
+        print("3. Ver estadísticas")
+        print("4. Reporte de sueldos")
+        print("5. Salir del programa")
+        op = input("Seleccione una opción: ")
+        if op == "1":#Se nuestra la funcion 1
+            asignar_sueldos_aleatorios()
+        elif op == "2":#Se nuestra la funcion 2
+            clasificar_sueldos()
+        elif op == "3":#Se nuestra la funcion 3
+            ver_estadisticas()
+        elif op == "4":#Se nuestra la funcion 4
+            reporte_sueldos()
+        elif op == "5":#Se da la salida al programa
+            print("Saliendo del programa...")
+            print("Desarrollado por Benjamin Retamal.")
+            print("RUT 22.095.759-4")
+            break#Sale automaticamente de el programa
+        else:#Le daria otro intento de opcion al menu
+            print("Opción no válida. Intente de nuevo.")
+            
+menu()
